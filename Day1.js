@@ -39,3 +39,50 @@ function testScope() {
   console.log(c); // 3 (const not affected)
 }
 testScope();
+
+
+//4.  Primitive vs Non-Primitive (Reference)
+
+// Primitive
+let a = 10;
+let b = a;
+b = 20;
+console.log(a); // 10 (value copy)
+
+// Non-Primitive
+let obj1 = { name: "Ali" };
+let obj2 = obj1;
+obj2.name = "Sara";
+console.log(obj1.name); // Sara (reference copy)
+
+
+
+//5. Objects 
+let person = {
+  name: "Munawar",
+  age: 22,
+  isStudent: true
+};
+
+//How too access an object 
+person.name        // Dot notation → "Munawar"
+person["age"]      // Bracket notation → 22
+
+Modifying an Object
+person.city = "Gilgit";    // Add
+person.Postion = "intern";   
+
+person.age = 25 // modified from 22 - 25 
+
+
+//Nested Object Example
+
+let student = {
+  name: "Abbas",
+  address: {
+    city: "Karachi",
+    zip: 74000
+  }
+};
+
+console.log(student.address.city); // "Karachi"       
