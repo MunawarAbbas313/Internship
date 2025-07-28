@@ -10,3 +10,14 @@ let y = 5;
 
 const z = 30;
 // z = 40; //  Error: Assignment to constant variable
+
+
+
+//2.hoisting 
+console.log(a); // undefined (hoisted)
+var a = 10;
+
+console.log(b); //  ReferenceError (not hoisted like var)
+let b = 20;
+
+
