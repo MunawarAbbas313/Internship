@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color Changer</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    <nav class="navbr">
+        <h2 class="data">Home</h2>
+        <h2 class="data">About</h2>
+        <h2 class="data">Color Code :<span class="ccode"></span></h2>
+    </nav>
+    <div class="main">
+        <div class="buttons">
+            <button class="start">Start</button>
+            <button class="undo">Undo</button>
+            <button class="rest">Reset</button>
+            <button class="copy">CopyCode</button>
+        </div>
+    </div>
+
+
+
+    <script>
+       
+       const cssColors = [
+  "AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure",
+  "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue",
+  "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse",
+  "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson",
+  "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray",
+  "DarkGreen", "DarkGrey", "DarkKhaki", "DarkMagenta", "DarkOliveGreen",
+  "DarkOrange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen",
+  "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet",
+  "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue",
+  "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro",
+  "GhostWhite", "Gold", "GoldenRod", "Gray", "Green",
+  "GreenYellow", "Grey", "HoneyDew", "HotPink", "IndianRed",
+  "Indigo", "Ivory", "Khaki", "Lavender", "LavenderBlush",
+  "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan",
+  "LightGoldenRodYellow", "LightGray", "LightGreen", "LightGrey", "LightPink",
+  "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey",
+  "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen",
+  "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid",
+  "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise",
+  "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin",
+  "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab",
+  "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen",
+  "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru",
+  "Pink", "Plum", "PowderBlue", "Purple", "RebeccaPurple",
+  "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon",
+  "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver",
+  "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow",
+  "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle",
+  "Tomato", "Turquoise", "Violet", "Wheat", "White",
+  "WhiteSmoke", "Yellow", "YellowGreen"
+];
+let index = 0;
+let Intervel = null;
+let PreviousIndex ;
+
+        let colorcodeBox = document.querySelector(".ccode")
+        let startBtn = document.querySelector(".start")
+        let undoBtn = document.querySelector(".undo")
+        let resetBen = document.querySelector(".rest")
+        let copyBtn = document.querySelector(".copy")
+
+ startBtn.addEventListener("click", ()=>{
+    Intervel= setInterval(()=>{
+          PreviousIndex = index;
+        index = (index+1)% cssColors.length;
+         document.body.style.backgroundColor = cssColors[index];
+        colorcodeBox.innerHTML = cssColors[index]
+        console.log(index);
+    },2000)
+ })
+
+
+undoBtn.addEventListener("click", () => {
+    clearInterval(Intervel);
+  if (PreviousIndex !== null && PreviousIndex !== index) {
+   index = PreviousIndex;
+    document.body.style.backgroundColor = cssColors[index];
+     colorcodeBox.innerHTML = cssColors[index]
+    console.log(PreviousIndex)
+    PreviousIndex = null;
+    
+  }
+});
+
+resetBen.addEventListener("click", ()=>{
+    clearInterval(Intervel);
+    index = null;
+    Intervel=null;
+    PreviousIndex = null;
+    document.body.style.backgroundColor = "black"
+     colorcodeBox.innerHTML = "black";
+})
+
+
+copyBtn.addEventListener("click", ()=>{
+    const checkAval = document.body.style.backgroundColor;
+    if(!checkAval)
+{
+    alert("No color Yet :")
+}
+else{
+    const CurrentColor = document.body.style.backgroundColor;
+    navigator.clipboard.writeText(CurrentColor)
+    .then(()=>alert(`Copied : ${CurrentColor}`))
+}
+})
+    </script>
+    
+</body>
+</html>
