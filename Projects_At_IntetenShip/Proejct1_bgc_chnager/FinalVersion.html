@@ -151,103 +151,82 @@ h2:hover {
 
   <script>
 
-  let interval = null;
   let previousColor = null;
 
-  const colorcodeBox = document.querySelector(".ccode");
-  const CurrnetcolorcodeBox = document.querySelector(".cccode");
-  const PrecolorcodeBox = document.querySelector(".pccode");
-  const startBtn = document.querySelector(".start");
-  const undoBtn = document.querySelector(".undo");
-  const resetBtn = document.querySelector(".rest");
-  const copyBtn = document.querySelector(".copy");
+const CurrnetcolorcodeBox = document.querySelector(".cccode");
+const PrecolorcodeBox = document.querySelector(".pccode");
+const startBtn = document.querySelector(".start");
+const undoBtn = document.querySelector(".undo");
+const resetBtn = document.querySelector(".rest");
+const copyBtn = document.querySelector(".copy");
 
-  function getRandomColorRGB() {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    return { r, g, b };
-  }
-/*
-The RGB values go into an array: [255, 87, 51]
+function getRandomColorRGB() {
+  return {
+    r: Math.floor(Math.random() * 256),
+    g: Math.floor(Math.random() * 256),
+    b: Math.floor(Math.random() * 256),
+  };
+}
 
-.map(x => x.toString(16)) converts each number to hexadecimal:
-
-255 → 'ff'
-
-87 → '57'
-
-51 → '33'
-
-.padStart(2, "0") ensures each value is 2 digits (e.g., 9 becomes '09')
-
-.join("") joins them into a single string: "ff5733"
-
-"#" + ... adds the # at the beginning
-*/
-  function rgbToHex(r, g, b) {
-    return (
-      "#" +
-      [r, g, b]
-        .map((x) => x.toString(16).padStart(2, "0"))
-        .join("")
-    );
-  }
-
-  startBtn.addEventListener("click", () => {
-    clearInterval(interval); 
-    interval = setInterval(() => {
-      previousColor = document.body.style.backgroundColor;
-      const { r, g, b } = getRandomColorRGB();
-      const newColorRGB = `rgb(${r}, ${g}, ${b})`;
-      const newColorHex = rgbToHex(r, g, b);
-
-      document.body.style.backgroundColor = newColorRGB;
-     
-      CurrnetcolorcodeBox.innerHTML = newColorHex;
-    }, 2000);
-  });
+function rgbToHex(r, g, b) {
+  return (
+    "#" +
+    [r, g, b]
+      .map((x) => x.toString(16).padStart(2, "0"))
+      .join("")
+  );
+}
 
 
-  undoBtn.addEventListener("click", () => {
-    clearInterval(interval); 
-    if (previousColor) {
-      document.body.style.backgroundColor = previousColor;
+startBtn.addEventListener("click", () => {
+  previousColor = document.body.style.backgroundColor;
 
-      // Extract RGB values from string like "rgb(255, 0, 0)"
-      const rgb = previousColor.match(/\d+/g);
-      if (rgb) {
-        const hex = rgbToHex(+rgb[0], +rgb[1], +rgb[2]);
-       
-        PrecolorcodeBox.innerText = hex;
-      }
+  const { r, g, b } = getRandomColorRGB();
+  const newColorRGB = `rgb(${r}, ${g}, ${b})`;
+  const newColorHex = rgbToHex(r, g, b);
 
-      previousColor = null;
+  document.body.style.backgroundColor = newColorRGB;
+  CurrnetcolorcodeBox.innerText = newColorHex;
+});
+
+
+undoBtn.addEventListener("click", () => {
+  if (previousColor) {
+    document.body.style.backgroundColor = previousColor;
+
+    const rgb = previousColor.match(/\d+/g);
+    if (rgb) {
+      const hex = rgbToHex(+rgb[0], +rgb[1], +rgb[2]);
+      PrecolorcodeBox.innerText = hex;
+      CurrnetcolorcodeBox.innerText = hex;
     }
-  });
 
-  resetBtn.addEventListener("click", () => {
-    clearInterval(interval);
     previousColor = null;
-    document.body.style.backgroundColor = "black";
-    CurrnetcolorcodeBox.innerText = "black";
-  });
+  }
+});
+
+
+resetBtn.addEventListener("click", () => {
+  previousColor = null;
+  document.body.style.backgroundColor = "black";
+  CurrnetcolorcodeBox.innerText = "black";
+  PrecolorcodeBox.innerText = "-";
+});
 
 
 copyBtn.addEventListener("click", () => {
-  const textToCopy = CurrnetcolorcodeBox.innerText
-  if (!textToCopy) {
+  const textToCopy = CurrnetcolorcodeBox.innerText;
+  if (!textToCopy || textToCopy === "-") {
     alert("No color yet!");
   } else {
     navigator.clipboard
       .writeText(textToCopy)
       .then(() => {
-        alert(`Copied : ${textToCopy}`)
+        alert(`Copied: ${textToCopy}`);
         copyBtn.innerText = "Copied!!";
-        
         setTimeout(() => {
           copyBtn.innerText = "CopyCode";
-        }, 500); // 0.5 second
+        }, 500);
       })
       .catch(() => alert("Failed to copy"));
   }
