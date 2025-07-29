@@ -1,0 +1,86 @@
+.navbr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  padding: 10px 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background: rgba(229, 222, 222, 0.2); 
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  transition: all 0.3s ease-in-out;
+}
+
+h2 {
+  background: rgba(172, 185, 172, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  color: #030303;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+h2:hover {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.3);
+  transform: scale(1.03);
+  color: #d1ffe8;
+}
+
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ height: 100vh;
+ 
+}
+
+.buttons {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 20px 30px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  transition: all 0.3s ease-in-out;
+}
+
+.buttons button {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgb(12, 12, 12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.buttons button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #181a19;
+  transform: scale(1.05);
+  box-shadow: 0 8px 40px rgba(255, 255, 255, 0.3);
+}
