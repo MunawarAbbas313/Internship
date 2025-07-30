@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From_Validation</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        body{
+            background-image: url("https://t3.ftcdn.net/jpg/02/70/35/00/360_F_270350073_WO6yQAdptEnAhYKM5GuA9035wbRnVJSr.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+           
+        }
+        .main{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70vh;
+            max-width: 95vw;
+            height: 75vh;
+            max-height: 95vh;
+            background: rgba(224, 221, 221, 0);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);        
+            -webkit-backdrop-filter: blur(10px); 
+            border: 1px solid rgba(13, 12, 12, 0.167);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            padding: 20px;
+            color: rgb(0, 0, 0);  
+           
+        }
+        .heading{
+            text-align: center;
+            font-size: 25px;
+        }
+        .heading > span{
+            color: rgb(166, 0, 255);
+        }
+        .det{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+        }
+        label{
+            font-size: 20px;
+        }
+        .inspan{
+            color: maroon;
+            font-weight: bold;
+        }
+        input{
+            border: none;
+            padding: 10px;
+            border-radius: 12px;
+            outline: none;
+            font-size: 16px;
+        }
+        input::placeholder{
+            font-size: 15px;
+        }
+        .generte{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .subBtn{
+            padding: 10px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: semi-bold;
+            background-color: rgb(85, 190, 85);
+            color: rgba(253, 253, 253, 0.767);
+        }
+        .subBtn:hover{
+            background-color: rgba(53, 199, 53, 0.538);
+            color: rgb(255, 255, 255);
+            transition: all 0.6s;
+        }
+       
+        .genLenghtInput {
+
+
+  width: 100%;
+  height: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  outline: none;
+  transition: background 0.3s;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* Track hover effect */
+.genLenghtInput:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+
+.genLenghtInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #a600ff, #00c3ff);
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 2px solid white;
+}
+
+.genLenghtInput::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+
+.genLenghtInput::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #a600ff, #00c3ff);
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            .main {
+                width: 98vw;
+                height: auto;
+                min-height: 90vh;
+                padding: 10px;
+                border-radius: 8px;
+                top: 0;
+                left: 0;
+                transform: none;
+                position: static;
+                margin: 10px auto;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+                padding: 20px;
+                
+            }
+            .det{
+                gap: 28px;
+            }
+            .heading {
+                font-size: 20px;
+            }
+            label {
+                font-size: 16px;
+            }
+            input {
+                font-size: 15px;
+                padding: 8px;
+            }
+            .generte {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+            .subBtn {
+                font-size: 16px;
+                padding: 8px;
+            }
+        }
+  
+    </style>
+</head>
+<body>
+    <div class="main">
+       <form action="">
+        <h2 class="heading">Form <span>Validation</span></h2>
+        <div class="det">
+            <label for="Name">
+                Name <span class="inspan">:</span>
+            </label>
+           
+            <input type="text" placeholder="Enter your Name" class="nameInput" required>
+            <label for="Email">
+               Email <span class="inspan">:</span>
+            </label>
+            <input type="email" placeholder="Enter your Email" class="emailInput" required>
+            <label for="Name">
+                Phone <span class="inspan">:</span>
+            </label>
+            <input type="text" placeholder="Enter your Phone" class="phoneInput" required >
+            <label for="pass">
+                Password <span class="inspan">:</span>
+            </label>
+             <input type="text" placeholder="Genrater Password using slider" class="passInput" >
+             <div class="generte">
+               <label for="passwordLength">Password Length <span class="inspan">:</span> 
+                <span id="rangeValue">8</span>
+                </label>
+             <input 
+                  type="range" 
+                  id="passwordLength" 
+                  min="8" 
+                  max="12" 
+                  value="8" 
+                  step="1"
+                  class="genLenghtInput"
+                 />
+
+             </div>
+             <button class="subBtn">Submit</button>
+        </div>
+       </form>
+    </div>
+
+    <script>
+          let NameInput = document.querySelector(".nameInput");
+          let EmailInput = document.querySelector(".emailInput");
+          let PhoneInput = document.querySelector(".phoneInput");
+          let PasswordInput = document.querySelector(".passInput");
+          let Genrater = document.querySelector(".genLenghtInput");
+          let rangeValue = document.querySelector("#rangeValue"); 
+          let submitBtn = document.querySelector(".subBtn");
+
+
+
+
+     function genRadnd(sizePass) {
+  let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
+  let password = '';
+  for (let i = 0; i < sizePass; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
+}
+
+Genrater.addEventListener("input", () => {
+  rangeValue.innerHTML = Genrater.value;
+  let llength = Genrater.value;
+  let generatedPassword = genRadnd(llength);
+  
+  PasswordInput.value = generatedPassword; 
+});
+
+         
+           function CheckEmail() {
+           let Emailval = EmailInput.value;
+            let emailRegex = /^[a-zA-Z0-9]+@[a-zA]+.com$/;
+           return emailRegex.test(Emailval);
+        }
+
+
+
+         
+
+    
+        
+         function Validate(){
+            let nameVal = NameInput.value;
+           
+            let phoneVal = PhoneInput.value;
+            let Passvalu = PasswordInput.value;
+            if(nameVal.length > 5 )
+         {
+            if(CheckEmail())
+         {
+            if(phoneVal.length > 10 && !isNaN(phoneVal))
+         {
+            if(Passvalu.length >= 8 && Passvalu.length <=12)
+         {
+            
+            Swal.fire({
+                 title: 'Sucessfull',
+                text: 'Submitted Sucessfuly',
+                icon: 'success',
+      
+                     });
+         }
+         else{
+             Swal.fire({
+                  title: 'Enter a Valid Password',
+                  text: 'Not Submitted ',
+                  icon: 'error',
+      
+                  });
+         }
+         
+         }
+         else{
+             Swal.fire({
+                  title: 'Phone number should be = 11 Digits',
+                  text: 'Not Submitted ',
+                  icon: 'error',
+      
+                  });
+         }
+         }
+         else{
+             Swal.fire({
+                  title: 'Email is not Valid',
+                  text: 'Not Submitted ',
+                  icon: 'error',
+      
+                  });
+         }               
+         }
+         else{
+             
+               Swal.fire({
+                  title: 'Name input is not Valid',
+                  text: 'Not Submitted ',
+                  icon: 'error',
+      
+                  });
+         }
+         }
+
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault(); 
+      Validate();
+     console.log("Button pressed");
+     
+    
+  });
+</script>
+
+    
+</body>
+</html>
