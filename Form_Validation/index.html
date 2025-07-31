@@ -30,7 +30,7 @@
             transform: translate(-50%, -50%);
             width: 70vh;
             max-width: 95vw;
-            height: 75vh;
+            height: 85vh;
             max-height: 95vh;
             background: rgba(224, 221, 221, 0);
             border-radius: 16px;
@@ -141,6 +141,16 @@
   cursor: pointer;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
+.check{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.check > label{
+  font-size: 15px;
+  font-weight: semi-bold;
+}
 
 
         /* Responsive styles */
@@ -183,6 +193,69 @@
                 padding: 8px;
             }
         }
+        /* Checkbox Container */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 35px;
+  margin: 8px 0;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+  font-weight: 500;
+  color: #222;
+}
+
+/* Hide default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Custom checkbox */
+.checkmark {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  transition: 0.3s ease-in-out;
+}
+
+/* On check */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #6f42c1;
+  border-color: #6f42c1;
+}
+
+/* Checkmark symbol */
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show checkmark when checked */
+.checkbox-container input:checked ~ .checkmark::after {
+  display: block;
+}
+
+/* Checkmark style */
+.checkbox-container .checkmark::after {
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
   
     </style>
 </head>
@@ -223,121 +296,162 @@
                  />
 
              </div>
+             <div class="check">
+  <label class="checkbox-container">Include Symbols
+    <input type="checkbox" class="forSym">
+    <span class="checkmark"></span>
+  </label>
+  <label class="checkbox-container">Include Numbers
+    <input type="checkbox" class="forNum">
+    <span class="checkmark"></span>
+  </label>
+  <label class="checkbox-container">Include Capital
+    <input type="checkbox" class="forCap">
+    <span class="checkmark"></span>
+  </label>
+</div>
+
              <button class="subBtn">Submit</button>
         </div>
        </form>
     </div>
 
-    <script>
-          let NameInput = document.querySelector(".nameInput");
-          let EmailInput = document.querySelector(".emailInput");
-          let PhoneInput = document.querySelector(".phoneInput");
-          let PasswordInput = document.querySelector(".passInput");
-          let Genrater = document.querySelector(".genLenghtInput");
-          let rangeValue = document.querySelector("#rangeValue"); 
-          let submitBtn = document.querySelector(".subBtn");
+   <script>
+  let NameInput = document.querySelector(".nameInput");
+  let EmailInput = document.querySelector(".emailInput");
+  let PhoneInput = document.querySelector(".phoneInput");
+  let PasswordInput = document.querySelector(".passInput");
+  let Genrater = document.querySelector(".genLenghtInput");
+  let rangeValue = document.querySelector("#rangeValue");
+  let submitBtn = document.querySelector(".subBtn");
+ let addSym = document.querySelector(".forSym");
+let addNumbers = document.querySelector(".forNum");
+let addCapChars = document.querySelector(".forCap");
 
 
+isTypedPassword = false; // Reset manual flag
+function genRadnd(sizePass) {
+  let lowerChars = "abcdefghijklmnopqrstuvwxyz";
+  let upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let numberChars = "0123456789";
+  let symbolChars = "!@#$%^&*()_+{}[]:;<>,.?/~`-=";
 
+  let chars = lowerChars;
 
-     function genRadnd(sizePass) {
-  let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
-  let password = '';
+  if (addCapChars.checked) {
+    chars += upperChars;
+  }
+  if (addNumbers.checked) {
+    chars += numberChars;
+  }
+  if (addSym.checked) {
+    chars += symbolChars;
+  }
+
+  let password = "";
+
   for (let i = 0; i < sizePass; i++) {
     password += chars.charAt(Math.floor(Math.random() * chars.length));
   }
+
   return password;
 }
 
-Genrater.addEventListener("input", () => {
-  rangeValue.innerHTML = Genrater.value;
-  let llength = Genrater.value;
-  let generatedPassword = genRadnd(llength);
-  
-  PasswordInput.value = generatedPassword; 
+[addCapChars, addNumbers, addSym].forEach(checkbox => {
+  checkbox.addEventListener("change", () => {
+    if (!isTypedPassword) {
+      let llength = Genrater.value;
+      let newPassword = genRadnd(llength);
+      PasswordInput.value = newPassword;
+    }
+  });
 });
 
-         
-           function CheckEmail() {
-           let Emailval = EmailInput.value;
-            let emailRegex = /^[a-zA-Z0-9]+@[a-zA]+.com$/;
-           return emailRegex.test(Emailval);
-        }
 
-
-
-         
-
-    
-        
-         function Validate(){
-            let nameVal = NameInput.value;
-           
-            let phoneVal = PhoneInput.value;
-            let Passvalu = PasswordInput.value;
-            if(nameVal.length > 5 )
-         {
-            if(CheckEmail())
-         {
-            if(phoneVal.length > 10 && !isNaN(phoneVal))
-         {
-            if(Passvalu.length >= 8 && Passvalu.length <=12)
-         {
-            
-            Swal.fire({
-                 title: 'Sucessfull',
-                text: 'Submitted Sucessfuly',
-                icon: 'success',
-      
-                     });
-         }
-         else{
-             Swal.fire({
-                  title: 'Enter a Valid Password',
-                  text: 'Not Submitted ',
-                  icon: 'error',
-      
-                  });
-         }
-         
-         }
-         else{
-             Swal.fire({
-                  title: 'Phone number should be = 11 Digits',
-                  text: 'Not Submitted ',
-                  icon: 'error',
-      
-                  });
-         }
-         }
-         else{
-             Swal.fire({
-                  title: 'Email is not Valid',
-                  text: 'Not Submitted ',
-                  icon: 'error',
-      
-                  });
-         }               
-         }
-         else{
-             
-               Swal.fire({
-                  title: 'Name input is not Valid',
-                  text: 'Not Submitted ',
-                  icon: 'error',
-      
-                  });
-         }
-         }
-
-  submitBtn.addEventListener("click", (e) => {
-    e.preventDefault(); 
-      Validate();
-     console.log("Button pressed");
-     
+  // Update range value and generate password
+  Genrater.addEventListener("input", () => {
+    rangeValue.innerHTML = Genrater.value;
+    let llength = Genrater.value;
+    let generatedPassword = genRadnd(llength);
+    PasswordInput.value = generatedPassword;
     
   });
+
+  // Email regex validation
+  function CheckEmail() {
+    let Emailval = EmailInput.value;
+    let emailRegex = /^[a-zA-Z0-9]+@[a-z]+\.(com)$/;
+    return emailRegex.test(Emailval);
+  }
+
+  // Validate function on submit
+  function Validate() {
+  let nameVal = NameInput.value;
+  let phoneVal = PhoneInput.value;
+  let Passvalu = PasswordInput.value;
+
+  if (nameVal.length > 5) {
+    if (CheckEmail()) {
+      if (phoneVal.length === 11 && !isNaN(phoneVal)) {
+
+        if (Passvalu.trim() === "") {
+          Swal.fire({
+            title: "Password Required!",
+            text: "Please enter or generate a password before submitting.",
+            icon: "error",
+          });
+          return;
+        }
+
+        // Check manually typed password against regex
+        if (isTypedPassword && !checkPassword(Passvalu)) {
+          Swal.fire({
+            title: "Invalid Password!",
+            text: "Typed password must be 8–12 characters and include uppercase, lowercase, number, and special character.",
+            icon: "error",
+          });
+          return;
+        }
+
+        // All validations passed
+        Swal.fire({
+          title: "Success!",
+          text: "Submitted Successfully",
+          icon: "success",
+        });
+
+      } else {
+        Swal.fire({
+          title: "Phone number should be 11 digits",
+          text: "Not Submitted",
+          icon: "error",
+        });
+      }
+    } else {
+      Swal.fire({
+        title: "Email is not Valid",
+        text: "Not Submitted",
+        icon: "error",
+      });
+    }
+  } else {
+    Swal.fire({
+      title: "Name input is not Valid",
+      text: "Not Submitted",
+      icon: "error",
+    });
+  }
+}
+
+
+  // Handle submit
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    Validate();
+    console.log("Button pressed");
+  });
 </script>
+
 
     
 </body>
