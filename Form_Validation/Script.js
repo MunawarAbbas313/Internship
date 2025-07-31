@@ -1,4 +1,3 @@
-<script>
 let NameInput = document.querySelector(".nameInput");
   let EmailInput = document.querySelector(".emailInput");
   let PhoneInput = document.querySelector(".phoneInput");
@@ -6,31 +5,49 @@ let NameInput = document.querySelector(".nameInput");
   let Genrater = document.querySelector(".genLenghtInput");
   let rangeValue = document.querySelector("#rangeValue");
   let submitBtn = document.querySelector(".subBtn");
+ let addSym = document.querySelector(".forSym");
+let addNumbers = document.querySelector(".forNum");
+let addCapChars = document.querySelector(".forCap");
 
-  // Track whether the password was manually typed
-  let isTypedPassword = false;
 
-  // Detect manual typing in password field
-  PasswordInput.addEventListener("input", () => {
-    isTypedPassword = true;
-  });
+isTypedPassword = false; // Reset manual flag
+function genRadnd(sizePass) {
+  let lowerChars = "abcdefghijklmnopqrstuvwxyz";
+  let upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let numberChars = "0123456789";
+  let symbolChars = "!@#$%^&*()_+{}[]:;<>,.?/~`-=";
 
-  // Generate random password of selected length
-  function genRadnd(sizePass) {
-    let chars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
-    let password = "";
-    for (let i = 0; i < sizePass; i++) {
-      password += chars.charAt(Math.floor(Math.random() * chars.length));
+  let chars = lowerChars;
+
+  if (addCapChars.checked) {
+    chars += upperChars;
+  }
+  if (addNumbers.checked) {
+    chars += numberChars;
+  }
+  if (addSym.checked) {
+    chars += symbolChars;
+  }
+
+  let password = "";
+
+  for (let i = 0; i < sizePass; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  return password;
+}
+
+[addCapChars, addNumbers, addSym].forEach(checkbox => {
+  checkbox.addEventListener("change", () => {
+    if (!isTypedPassword) {
+      let llength = Genrater.value;
+      let newPassword = genRadnd(llength);
+      PasswordInput.value = newPassword;
     }
-    return password;
-  }
+  });
+});
 
-  // Password regex validation function
-  function checkPassword(password) {
-    let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,12}$/;
-    return passwordRegex.test(password);
-  }
 
   // Update range value and generate password
   Genrater.addEventListener("input", () => {
@@ -38,7 +55,7 @@ let NameInput = document.querySelector(".nameInput");
     let llength = Genrater.value;
     let generatedPassword = genRadnd(llength);
     PasswordInput.value = generatedPassword;
-    isTypedPassword = false; // Reset manual flag
+    
   });
 
   // Email regex validation
@@ -114,4 +131,3 @@ let NameInput = document.querySelector(".nameInput");
     Validate();
     console.log("Button pressed");
   });
-</script>
