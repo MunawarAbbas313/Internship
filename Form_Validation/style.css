@@ -1,4 +1,4 @@
- *{
+  *{
             padding: 0;
             margin: 0;
             box-sizing: border-box;
@@ -22,7 +22,7 @@
             transform: translate(-50%, -50%);
             width: 70vh;
             max-width: 95vw;
-            height: 75vh;
+            height: 85vh;
             max-height: 95vh;
             background: rgba(224, 221, 221, 0);
             border-radius: 16px;
@@ -133,6 +133,16 @@
   cursor: pointer;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
+.check{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.check > label{
+  font-size: 15px;
+  font-weight: semi-bold;
+}
 
 
         /* Responsive styles */
@@ -175,4 +185,65 @@
                 padding: 8px;
             }
         }
-  
+        /* Checkbox Container */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 35px;
+  margin: 8px 0;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+  font-weight: 500;
+  color: #222;
+}
+
+/* Hide default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Custom checkbox */
+.checkmark {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  transition: 0.3s ease-in-out;
+}
+
+/* On check */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #6f42c1;
+  border-color: #6f42c1;
+}
+
+/* Checkmark symbol */
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show checkmark when checked */
+.checkbox-container input:checked ~ .checkmark::after {
+  display: block;
+}
+
+/* Checkmark style */
+.checkbox-container .checkmark::after {
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
