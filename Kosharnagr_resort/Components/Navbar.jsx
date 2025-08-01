@@ -47,32 +47,33 @@ function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`absolute top-16 left-0 w-full bg-white border-y border-gray-200 shadow-md transition-all duration-300 ease-in-out z-[90] ${
-          isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10 pointer-events-none"
-        } md:hidden`}
-      >
-        <ul className="flex flex-col gap-4 px-6 py-6 text-lg font-medium">
-          {data.navigation.map((item, i) => (
-            <li key={i}>
-              <NavLink
-                to={item.path}
-                onClick={() => setIsMenuOpen(false)}
-                className={({ isActive }) =>
-                  `group border border-gray-400 rounded-xl w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-all relative overflow-hidden block ${
-                    isActive ? "text-slate-500" : "text-black"
-                  }`
-                }
-              >
-                <span className="relative z-10 group-hover:text-slate-500 transition duration-200">
-                  {item.label}
-                </span>
-                <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </div>
+<div
+  className={`fixed top-20 left-0 w-full bg-white border-y border-gray-200 shadow-md transition-all duration-300 ease-in-out z-[90] ${
+    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10 pointer-events-none"
+  } md:hidden`}
+>
+  <ul className="flex flex-col gap-4 px-6 py-6 text-lg font-medium">
+    {data.navigation.map((item, i) => (
+      <li key={i}>
+        <NavLink
+          to={item.path}
+          onClick={() => setIsMenuOpen(false)}
+          className={({ isActive }) =>
+            `group border border-gray-400 rounded-xl w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-all relative overflow-hidden block ${
+              isActive ? "text-slate-500" : "text-black"
+            }`
+          }
+        >
+          <span className="relative z-10 group-hover:text-slate-500 transition duration-200">
+            {item.label}
+          </span>
+          <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
+        </NavLink>
+      </li>
+    ))}
+  </ul>
+</div>
+
     </>
   );
 }
