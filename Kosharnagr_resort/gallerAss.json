@@ -1,0 +1,48 @@
+{
+  "gallerySixImg": [
+    {
+      "category": "Nature",
+      "image": "https://images.unsplash.com/photo-1694505455898-48d4676430a3?auto=format&fit=crop&w=656&h=649"
+    },
+    {
+      "category": "Nature",
+      "image": "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=656&h=649"
+    },
+    {
+      "category": "Waterfall",
+      "image": "https://images.unsplash.com/photo-1651003829069-d11e7bbcb412?auto=format&fit=crop&w=656&h=649"
+    },
+    {
+      "category": "Waterfall",
+      "image": "https://images.unsplash.com/photo-1566550737854-b348bf1653ba?auto=format&fit=crop&w=656&h=649"
+    },
+    {
+      "category": "Mountain View",
+      "image": "https://images.unsplash.com/photo-1590435768306-1c1b0561f73c?auto=format&fit=crop&w=656&h=649"
+    },
+    {
+      "category": "Mountain View",
+      "image": "https://images.unsplash.com/photo-1673910175360-22833a889a98?auto=format&fit=crop&w=656&h=649"
+    }
+  ],
+  "twoImgsNature": [
+    {
+      "category": "Nature",
+      "image": "https://images.unsplash.com/photo-1696584776164-e0ca9ac8ff24?auto=format&fit=crop&w=656&h=470"
+    },
+    {
+      "category": "Nature",
+      "image": "https://images.unsplash.com/photo-1696036897541-32e896b17635?auto=format&fit=crop&w=656&h=470"
+    }
+  ],
+  "twoImgsViews": [
+    {
+      "category": "Mountain View",
+      "image": "https://images.unsplash.com/photo-1684229440950-389733722e2f?auto=format&fit=crop&w=656&h=470"
+    },
+    {
+      "category": "Mountain View",
+      "image": "https://images.unsplash.com/photo-1602589081234-ea5e74005804?auto=format&fit=crop&w=656&h=470"
+    }
+  ]
+}
