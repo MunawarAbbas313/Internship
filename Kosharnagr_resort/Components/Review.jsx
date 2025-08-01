@@ -18,7 +18,7 @@ function Review() {
         trigger: containerRef.current,
         start: "top 80%",
         toggleActions: "play reverse play reverse",
-        markers: false, // set to true for debugging
+        markers: false,
       },
     });
 
@@ -39,11 +39,14 @@ function Review() {
   }, []);
 
   return (
-    <div ref={containerRef} className="flex  md:max-w-7xl mx-auto px-6 md:flex text-white shadow-xl">
-      {/* Left Image */}
+    <div
+      ref={containerRef}
+      className="flex flex-col md:flex-row gap-6 md:max-w-7xl mx-auto px-6 text-white shadow-xl"
+    >
+      {/* Left Image - hidden on small screens */}
       <div
         ref={leftRef}
-        className="w-1/2 h-[450px] flex justify-center items-center rounded-xl"
+        className="hidden md:flex w-full md:w-1/2 h-[300px] md:h-[450px] justify-center items-center rounded-xl"
       >
         <img
           src={data.reviews[0].leftImg}
@@ -55,25 +58,21 @@ function Review() {
       {/* Right Review Content */}
       <div
         ref={rightRef}
-        className="w-1/2 text-center flex flex-col items-center justify-center gap-4 bg-green-600 h-[450px] rounded-xl"
+        className="w-full md:w-1/2 text-center flex flex-col items-center justify-center gap-4 bg-green-600 h-[350px] md:h-[450px] rounded-xl p-4"
       >
-        {/* Stars */}
         <div className="text-2xl text-yellow-500">★★★★★</div>
 
-        {/* Comment */}
         <p className="text-xl font-medium max-w-md text-white">
           {review.comment}
         </p>
 
-        {/* Avatar */}
         <img
           src={review.avatar}
           alt="Avatar"
           className="w-16 h-16 rounded-full object-cover border-2 border-green-700"
         />
 
-        {/* Reviewer Name */}
-        <p className=" font-semibold text-white text-xl" >
+        <p className="font-semibold text-white text-xl">
           {review.name || "John Doe"}
         </p>
       </div>
