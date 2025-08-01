@@ -1,0 +1,81 @@
+{
+  "companyInfo": {
+    "name": "KosharNagar",
+    "logo": "https://example.com/logo.png",
+    "address": "123, Main Street, Islamabad, Pakistan",
+    "phone": "+92-300-1234567",
+    "email": "info@kosharnagar.com",
+    "socialLinks": {
+      "facebook": "https://facebook.com/kosharnagar",
+      "instagram": "https://instagram.com/kosharnagar",
+      "twitter": "https://twitter.com/kosharnagar"
+    }
+  },
+  "navigation": [{ "label": "Home", "path": "/" },
+   { "label": "Accomdation", "path": "/Accomdation" },
+  { "label": "Gallery", "path": "/Gallery" },
+
+  { "label": "Contect", "path": "/Contect" }],
+  "heroVideo" : "/Video/mybgVideo.mp4",
+  "heroImages": [
+    
+  ],
+  "aboutImages": [
+  "https://images.unsplash.com/photo-1692966811604-f4465742001b?auto=format&fit=crop&w=656&h=761",
+  "https://images.unsplash.com/photo-1646606624518-793d2aac96b7?auto=format&fit=crop&w=656&h=761"
+],
+"services":[
+    "https://images.unsplash.com/photo-1609925428492-0dc8cdde517f?auto=format&fit=crop&w=861&h=619"
+],
+
+  "galleryImages": [
+    "https://example.com/gallery1.jpg",
+    "https://example.com/gallery2.jpg",
+    "https://example.com/gallery3.jpg"
+  ],
+  "reviews": [
+    {
+      "leftImg":"https://images.unsplash.com/photo-1571896196318-dee934855e61?auto=format&fit=crop&w=861&h=653"
+    },
+    {
+      "name": "Ayesha Khan",
+      "rating": 5,
+      "comment": "Amazing place with wonderful hospitality!",
+      "avatar": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=96&h=96"
+    },
+    {
+      "name": "John Doe",
+      "rating": 4,
+      "comment": "Great experience overall.",
+      "avatar": "data:image/jpeg;base64,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"
+    },
+    {
+      
+    }
+  ],
+  "ReviewCards": [
+  {
+    "stars": 5,
+    "text": "We loved every moment at Kosharnagar, from the luxurious rooms to the breathtaking scenery.",
+    "name": "Michael Smith",
+    "location": "Bhamrot Sayedan",
+    "image": "https://images.unsplash.com/photo-1692966811604-f4465742001b?auto=format&fit=crop&w=80&h=80"
+  },
+  {
+    "stars": 5,
+    "text": "The resort's serene environment and stunning views made our stay truly memorable.",
+    "name": "Emily Johnson",
+    "location": "Murree Hills",
+    "image": "https://images.unsplash.com/photo-1646606624518-793d2aac96b7?auto=format&fit=crop&w=80&h=80"
+  },
+  {
+    "stars": 5,
+    "text": "Amazing place with wonderful hospitality!stunning views made our stay truly memorable.",
+    "name": "Ayesha Khan",
+    "location": "Islamabad",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=96&h=96"
+  }
+]
+
+  
+}
