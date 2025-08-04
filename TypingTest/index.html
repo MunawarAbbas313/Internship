@@ -1,1 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typing Test App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
 
+    body {
+      background: linear-gradient(135deg, #e0f7fa, #fff3e0);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #00796b;
+    }
+
+    .typing-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .time-box {
+      background-color: #fffde7;
+      color: #f57f17;
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      animation: fadeSlideIn 0.6s ease-in-out both;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .text-box {
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-size: 1.1rem;
+      color: #333;
+      min-height: 200px;
+      line-height: 1.7;
+      background-color: #fdfdfd;
+      overflow-y: auto;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .controls button {
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #00796b;
+      color: white;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .controls button:hover {
+      background-color: #004d40;
+      transform: translateY(-1px);
+    }
+
+    .stats {
+      display: none;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      text-align: center;
+      border-top: 1px solid #eee;
+      padding-top: 1rem;
+    }
+
+    .stat {
+      background: #f7f7f7;
+      border-radius: 10px;
+      padding: 1rem;
+      min-width: 130px;
+      margin: 0.5rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    }
+
+    .stat h4 {
+      margin-bottom: 0.5rem;
+      color: #00796b;
+      font-size: 1rem;
+    }
+
+    .stat span {
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #222;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .text-box {
+        font-size: 1rem;
+        padding: 1rem;
+      }
+
+      .stats {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .controls {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+    }
+    .correct {
+  color: green;
+}
+.incorrect {
+  color: red;
+  text-decoration: underline;
+}
+.active-char {
+  border-bottom: 2px solid blue;
+}
+.input-container {
+  width: 100%;
+}
+
+#input-box {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  outline: none;
+  resize: none;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fefefe;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: border 0.2s ease;
+}
+
+#input-box:focus {
+  border-color: #00796b;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧠 Typing Speed Test</h1>
+  </header>
+  
+  <div class="typing-container">
+    <div class="time-box" id="timer-display">
+      ⏱ Time Left: <span id="time-left">0</span>s
+    </div>
+
+    <div class="text-box" id="text-box">
+     click the start ...........
+    </div>
+     <textarea id="input-box" placeholder="Start typing here..." rows="5"></textarea>
+
+    <div class="controls">
+      <button id="start-btn">Start</button>
+      <button id="reset-btn">Reset</button>
+      <button id="show-results-btn">Show Stats</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <h4>WPM</h4>
+        <span id="wpm">--</span>
+      </div>
+      <div class="stat">
+        <h4>Accuracy</h4>
+        <span id="accuracy">--%</span>
+      </div>
+      <div class="stat">
+        <h4>Correct</h4>
+        <span id="correct">--</span>
+      </div>
+      <div class="stat">
+        <h4>Incorrect</h4>
+        <span id="incorrect">--</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 TypingTest Inc. | Built with ❤️ by Munawar
+  </footer>
+
+  <script>
+   let startBtn = document.querySelector("#start-btn");
+let resetBtn = document.querySelector("#reset-btn");
+let statusBtn = document.querySelector("#show-results-btn");
+
+let textBox = document.querySelector("#text-box");
+let WordPm = document.querySelector("#wpm");
+let accuracybox = document.querySelector("#accuracy");
+let correctbox = document.querySelector("#correct");
+let incorrectbox = document.querySelector("#incorrect");
+
+const inputBox = document.getElementById("input-box");
+inputBox.disabled = true;
+
+ const longQuotes = [
+  "The journey of a thousand miles begins with a single step, but that first step is often the most difficult. Each decision you make sets the tone for your direction. Whether you succeed or fail isn’t determined in one moment, but by your willingness to keep moving forward through uncertainty, doubt, and fear. Progress is born from persistence and a refusal to quit.",
+  
+  "Life is not about waiting for the storm to pass; it's about learning how to dance in the rain. Challenges will come and go, but your attitude will shape the outcome more than your circumstances ever will. Strength doesn’t always roar—sometimes it’s the quiet voice at the end of the day saying, 'I will try again tomorrow.' Keep going even when it's hard, especially when it's hard.",
+  
+  "Success is not measured by how high you climb but by how many times you rise after falling. Every failure is a chance to start again, more intelligently and more courageously. Do not fear mistakes; they are the stepping stones on the path to mastery. Greatness is not achieved overnight but through consistent effort and an unshakeable belief in your purpose.",
+  
+  "You were not born to live an average life. Within you is a fire capable of lighting up the darkest places and a voice powerful enough to shift the direction of your life. Doubt will whisper, but courage will roar. Never let comfort kill your dreams. Chase what sets your soul on fire, and remember: greatness begins when you decide to rise and refuse to settle.",
+  
+  "Time is the most valuable currency you own. Every second that passes is a chance to build, to grow, and to evolve. Don’t waste it trying to be someone you’re not or living a life designed by others. Be brave enough to chase the unknown, to fail in pursuit of meaning, and to speak your truth even when your voice shakes. That’s where real freedom begins.",
+  
+  "The world is full of noise—expectations, opinions, and distractions—but your greatest power lies in silence and focus. Create from the heart, not to impress. Strive to leave behind work that matters, conversations that heal, and moments that stay. You don’t need to be perfect to be impactful. Just present, purposeful, and authentic in all that you do.",
+  
+  "In a world where everyone rushes to be seen, take the road of quiet excellence. Let your work speak louder than your words and your consistency outshine your competition. There is honor in patience and power in persistence. The journey may be long, but every step walked with intention brings you closer to the version of yourself you’re meant to become.",
+  
+  "We live in a time when it's easy to scroll through someone else's life and forget the beauty of your own. Don’t measure your progress with someone else’s ruler. Your path is yours alone, shaped by your struggles, strengths, and scars. Comparison robs joy. Focus on your pace, your growth, and your goals. The only person you need to be better than is who you were yesterday.",
+  
+  "Discipline is choosing between what you want now and what you want most. Motivation will fade, but discipline carries you when inspiration is gone. Wake up every day with a commitment to your future self. Do the work when it’s boring. Show up when you’re tired. Be proud of yourself not just for dreaming, but for doing. That’s what builds character and results.",
+  
+  "Never underestimate the power of showing up. You don’t have to be the smartest, fastest, or most talented—you just need to keep showing up when it matters most. The small actions you take today compound over time into something massive. So write the words, take the steps, make the call, and trust that momentum, once built, can change your entire life."
+];
+
+let initialTime = 100;
+let TimeGiven = initialTime;
+let timeIntervel;
+let leftTime = document.querySelector("#time-left");
+
+// TIMER
+function setTime() {
+  clearInterval(timeIntervel);
+  TimeGiven = initialTime;
+  leftTime.innerText = TimeGiven;
+
+  timeIntervel = setInterval(() => {
+    if (TimeGiven > 0) {
+      TimeGiven--;
+      leftTime.innerText = TimeGiven;
+    } else {
+      clearInterval(timeIntervel);
+      inputBox.disabled = true;
+      leftTime.innerText = "Time out";
+      textBox.innerHTML = "Start Again";
+    }
+  }, 1000);
+}
+
+//  RANDOM QUOTEee
+function getRnadomQoute() {
+  return longQuotes[Math.floor(Math.random() * longQuotes.length)];
+}
+
+//  RESET
+resetBtn.addEventListener("click", () => {
+  textBox.innerText = "Start it";
+  WordPm.innerText = "0";
+  accuracybox.innerText = "0%";
+  correctbox.innerText = "0";
+  incorrectbox.innerText = "0";
+  leftTime.innerHTML = "0";
+  clearInterval(timeIntervel);
+  inputBox.disabled = true;
+  inputBox.value = "";
+});
+
+//  TOGGLE STATS
+let hideDiv = true;
+statusBtn.addEventListener("click", () => {
+  const statusDiv = document.querySelector(".stats");
+  statusDiv.style.display = hideDiv ? "flex" : "none";
+  statusBtn.innerHTML = hideDiv ? "Hide Stats" : "Show Stats";
+  hideDiv = !hideDiv;
+});
+
+// START BUTTON
+startBtn.addEventListener("click", () => {
+  const qoute = getRnadomQoute();
+  const QouteData = qoute.split("");
+  const finalObtained = QouteData.map(char =>
+    char === " " ? `<span>&nbsp;</span>` : `<span>${char}</span>`
+  ).join(" ");
+
+  textBox.innerHTML = finalObtained;
+  setTime();
+  inputBox.disabled = false;
+  inputBox.focus();
+  inputBox.value = "";
+  correctbox.innerText = 0;
+  incorrectbox.innerText = 0;
+  WordPm.innerText = 0;
+  accuracybox.innerText = "0%";
+});
+
+//  TYPING INPUT
+inputBox.addEventListener("input", () => {
+  const qoutespan = textBox.querySelectorAll("span");
+  const typedText = inputBox.value.split("");
+
+  let correct = 0;
+  let incorrect = 0;
+
+  qoutespan.forEach((span, index) => {
+    const typeChar = typedText[index];
+
+    if (typeChar == null) {
+      span.classList.remove("correct", "incorrect");
+    } else if (typeChar === span.innerText) {
+      span.classList.add("correct");
+      span.classList.remove("incorrect");
+      correct++;
+    } else {
+      span.classList.add("incorrect");
+      span.classList.remove("correct");
+      incorrect++;
+    }
+  });
+
+  correctbox.innerText = correct;
+  incorrectbox.innerText = incorrect;
+
+  const totalTyped = correct + incorrect;
+  const accuracy = totalTyped > 0 ? ((correct / totalTyped) * 100).toFixed(1) : 0;
+  accuracybox.innerText = `${accuracy}%`;
+
+  const timeTaken = (initialTime - TimeGiven) / 60;
+  const wpm = timeTaken > 0 ? (correct / 5) / timeTaken : 0;
+  WordPm.innerHTML = Math.round(wpm);
+});
+
+
+  </script>
+</body>
+</html>
