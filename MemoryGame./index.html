@@ -1,0 +1,92 @@
+ <div class="wrap">
+    <div class="panel" aria-live="polite">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" aria-hidden="false">
+        <div class="title">
+          <div class="logo">MM</div>
+          <div>
+            <h1>Memory Match</h1>
+            <p class="lead">Find pairs. Fast. Finesse counts.</p>
+          </div>
+        </div>
+
+        <div class="stats" role="status" aria-atomic="true">
+          <div class="stat">
+            <div class="label">Moves</div>
+            <div id="moves" class="value">0</div>
+          </div>
+          <div class="stat">
+            <div class="label">Matches</div>
+            <div id="matches" class="value">0 / 8</div>
+          </div>
+          <div class="stat">
+            <div class="label">Time</div>
+            <div id="timer" class="value">0s</div>
+          </div>
+          <div class="stat">
+            <div class="label">Stars</div>
+            <div id="stars" class="value">★★★</div>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="label" style="font-size:12px;margin-bottom:8px;color:rgba(230,238,248,0.6)">Progress</div>
+          <div class="progress-bar" aria-hidden="true"><i id="progressInner"></i></div>
+        </div>
+
+        <div class="controls">
+          <button id="restartBtn" class="btn">🔁 Restart</button>
+          <button id="hintBtn" class="btn secondary">💡 Hint</button>
+        </div>
+
+        <div style="width:100%;margin-top:6px;text-align:center;color:rgba(230,238,248,0.6);font-size:12px">
+          Pro tip: finish with fewer moves for more stars.
+        </div>
+      </aside>
+
+      <!-- GAME AREA -->
+      <main class="board-wrap">
+        <div class="board-header">
+          <div>
+            <div class="subtitle">8 Pairs — 16 Cards</div>
+            <div class="small-meta" style="margin-top:6px">Tap or click any card to begin</div>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="font-size:13px;color:rgba(230,238,248,0.66)">Moves: <strong id="movesMini">0</strong></div>
+            <div style="font-size:13px;color:rgba(230,238,248,0.66)">Time: <strong id="timerMini">0s</strong></div>
+          </div>
+        </div>
+
+        <section class="grid" id="grid" role="grid" aria-label="Memory cards"></section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Win Modal -->
+  <div class="modal" id="winModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card" role="document">
+      <h2 id="winTitle">You did it!</h2>
+      <p id="winText" style="color:rgba(230,238,248,0.78);margin-top:6px">Great memory — here's how you performed.</p>
+
+      <div class="modal-row" style="margin-top:14px">
+        <div class="stat-chip">
+          <div style="font-size:12px;color:rgba(230,238,248,0.6)">Time</div>
+          <div id="winTime" style="font-weight:700">0s</div>
+        </div>
+        <div class="stat-chip">
+          <div style="font-size:12px;color:rgba(230,238,248,0.6)">Moves</div>
+          <div id="winMoves" style="font-weight:700">0</div>
+        </div>
+        <div class="stat-chip">
+          <div style="font-size:12px;color:rgba(230,238,248,0.6)">Stars</div>
+          <div id="winStars" style="font-weight:700">★★★</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:18px">
+        <button id="playAgain" class="btn">Play Again</button>
+        <button id="closeModal" class="btn secondary">Close</button>
+      </div>
+    </div>
+  </div>
