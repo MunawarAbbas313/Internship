@@ -1,1 +1,16 @@
 
+/* small custom styles */
+  .backdrop-blur { backdrop-filter: blur(6px); }
+  .card-hover:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 12px 30px rgba(0,0,0,0.45); }
+  .movie-carousel { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+  .skeleton { background: linear-gradient(90deg,#2c2c2c,#3a3a3a,#2c2c2c); background-size:200% 100%; animation: sh 1.4s linear infinite; }
+  @keyframes sh { 0% { background-position:100% 50% } 100% { background-position:-100% 50% } }
+  input::placeholder { color: rgba(255,255,255,0.6); }
+  body.dark input::placeholder { color: rgba(255,255,255,0.75); }
+  nav { transition: background-color .25s ease, box-shadow .25s ease; }
+  .card-img { height: 260px; object-fit: cover; width: 100%; }
+  .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: 30px; z-index: 80; }
+</style>
+
+
+/* Rest use tailnd css */
